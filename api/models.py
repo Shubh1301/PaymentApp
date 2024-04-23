@@ -17,3 +17,13 @@ class User(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(null=False, unique=True)
     annual_income = models.CharField(max_length=50)
+
+
+class Loan(models.Model):
+    unique_user_id = models.UUIDField()  # A unique user identifier
+    loanId = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    loan_type = models.CharField(max_length=100)  # The type of loan
+    loan_amount = models.DecimalField(max_digits=10, decimal_places=2)  # The loan amount in rupees
+    interest_rate = models.DecimalField(max_digits=5, decimal_places=2)  # The interest rate as a percentage
+    term_period = models.PositiveIntegerField()  # The duration for repayment in months
+    disbursement_date = models.DateField()  # The date of loan disbursal
